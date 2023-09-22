@@ -171,7 +171,7 @@ int main() {
     goto menu;
     break;
 }
-    
+
     }
 
 case 4: {
@@ -324,8 +324,8 @@ case 4: {
     case 7:{
         int affiche;
     printf("1-->Afficher le nombre total des taches.\n");
-    printf("2-->Afficher le nombre de tâches complètes et incomplètes.\n");
-    printf("3-->Afficher le nombre de jours restants jusqu'au délai de chaque tâche.\n");
+    printf("2-->Afficher le nombre des tâches complètes et incomplètes.\n");
+    printf("3-->Afficher le nombre des jours restants jusqu'au délai de chaque tâche.\n");
     printf("saisir votre choix : ");
     scanf("%d",&affiche);
     if(affiche==1){
@@ -345,16 +345,35 @@ case 4: {
         }
          printf("les taches complet : %d taches \n",tcomlet);
             printf("les taches incomplet : %d taches \n",tincomplet);
-            break;
-    }goto menu;
-    if(affiche==3){
+            goto menu;
+    }
+
+ if (affiche==3) {
+    printf("Tâches avec le délai des jours restants :\n");
+    time_t seconds = time(NULL);
+    struct tm *current_time = localtime(&seconds);
+    int currentYear = (current_time->tm_year + 1900);
+    int currentMonth = (current_time->tm_mon + 1);
+    int currentDay = current_time->tm_mday;
+
+    for (int i = 0; i < size; i++) {
+        // Calculer le nombre de jours restants jusqu'au délai de la tâche
+        int jours = taches[i].deadline.annee * 365 + taches[i].deadline.mois * 30 + taches[i].deadline.jour;
+        int delai_jour = jours - (currentYear * 365 + currentMonth * 30 + currentDay);
+
+            printf("Identifiant : %d\nTitre : %s\nDescription : %s\nDeadline : %d/%d/%d\nStatut : %s\nNombre de jours restants : %d\n\n",
+                taches[i].identifiant, taches[i].titre, taches[i].description,
+                taches[i].deadline.jour, taches[i].deadline.mois, taches[i].deadline.annee,
+                taches[i].statut, delai_jour);
 
     }
 
     goto menu;
-    break;
-    }
 }
 
+
+    }
+
+    }
 return 0;
 }
