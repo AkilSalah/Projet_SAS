@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 
-// Struct definitions...
+// Définition des structures
 typedef struct date
 {
     int jour;
@@ -20,25 +20,11 @@ typedef struct sas
     char statut[50];
 } tache;
 
-static int Identifiant = 1;
-
-// Function prototypes...
-void menu();
-void ajouter_tache(tache taches[], int *size);
-void ajouter_plusieure_taches(tache taches[], int *size);
-void affichage(tache taches[], int size);
-void trie_alphabitique(tache taches[], int size);
-void trie_deadline(tache taches[], int size);
-void delai_trois_jours(tache taches[], int size);
-void modification(tache taches[], int size);
-void supprimer(tache taches[], int *size);
-void recherche(tache taches[], int size);
-void statistique(tache taches[], int size);
+ int Identifiant = 1;
 
 int main()
 {
     printf("\n\t\t*********************** Projet SAS Gestion de Taches ToDo **************************\n\n");
-
     tache taches[100];
     int size = 0;
     int choix;
@@ -62,27 +48,35 @@ int main()
              system("cls");
             affichage(taches, size);
             break;
-        case 3:{
+        case 3:
+             system("cls");
+            affichage(taches, size);
+            break;
+        case 4:{
             int affiche;
-            affichage(taches,size);
+            printf("\n \t\t --------------------------------------------------------------------------------\n");
             printf("\t\t >>>> MENU D'AFFICHAGE :\n");
             printf("\t\t 1 --> Trier les taches par ordre alphabetique.\n");
             printf("\t\t 2 --> Trier les taches par deadline.\n");
             printf("\t\t 3 --> Afficher les taches dont le deadline est dans 3 jours ou moins.\n\n");
+            printf(" \t\t ----------------------------------------------------------------------------------\n");
             printf("Saisir votre choix : ");
             scanf("%d", &affiche);
             printf("\n");
 
+
         switch (affiche)
     {
             case 1:
-
+                 system("cls");
                 trie_alphabitique(taches, size);
                 break;
             case 2:
+                 system("cls");
                 trie_deadline(taches, size);
                 break;
             case 3:
+                 system("cls");
                 delai_trois_jours(taches, size);
                 break;
             default:
@@ -90,20 +84,24 @@ int main()
             }
         }
             break;
-        case 4:
+        case 5:
+             system("cls");
             modification(taches, size);
             break;
-        case 5:
+        case 6:
+             system("cls");
             supprimer(taches, &size);
             break;
-        case 6:
+        case 7:
+             system("cls");
             recherche(taches, size);
             break;
-        case 7:
+        case 8:
+             system("cls");
             statistique(taches, size);
             break;
-        case 8:
-            printf("\n\t\t\t\t\t >>> AU REVOIR (: \n\n");
+        case 9:
+            printf("\n\t\t\t\t\t >>>>> AU REVOIR <<<<<(: \n\n");
             return 0;
         default:
             printf("Votre choix est invalide !!\n");
@@ -113,21 +111,27 @@ int main()
     return 0;
 
 }
+// Fonction pour afficher le menu
 
 void menu()
 {
+    printf("\n\t\t------------------------------------------------\n");
     printf("\t\t>>>> VOTRE MENU :\n");
     printf("\t\t1 --> Introduire une tache\n");
     printf("\t\t2 --> Introduire des plusieurs taches\n");
     printf("\t\t3 --> Affichage\n");
-    printf("\t\t4 --> Modifier une tache\n");
-    printf("\t\t5 --> Supprimer une tache\n");
-    printf("\t\t6 --> Chercher une tache\n");
-    printf("\t\t7 --> Statistique des taches\n");
-    printf("\t\t8 --> Quitter le programme\n");
+    printf("\t\t4 --> Ordre des taches\n");
+    printf("\t\t5 --> Modifier une tache\n");
+    printf("\t\t6 --> Supprimer une tache\n");
+    printf("\t\t7 --> Chercher une tache\n");
+    printf("\t\t8 --> Statistique des taches\n");
+    printf("\t\t9 --> Quitter le programme\n");
+    printf("\t\t------------------------------------------------\n");
     printf("\t\t>>>> Veuillez saisir votre choix : ");
-    
+
 }
+
+// Fonction pour ajouter une tache
 
 void ajouter_tache(tache taches[], int *size)
 {
@@ -142,11 +146,11 @@ void ajouter_tache(tache taches[], int *size)
     printf("Pour une tache a realiser, tapez 0\n");
     printf("Pour une tache en cours de realisation, tapez 1\n");
     printf("Pour une tache realiser, tapez 2\n");
-    
+
     while (1) {
         printf("Taper votre choix : ");
         scanf("%d", &statut);
-        
+
         if (statut == 0) {
             strcpy(taches[*size].statut, "A REALISER");
             break;
@@ -160,12 +164,13 @@ void ajouter_tache(tache taches[], int *size)
             printf("Choix invalide, veuillez réessayer.\n");
         }
     }
-    
+
     printf("\n");
     taches[*size].identifiant = Identifiant;
     Identifiant++;
     (*size)++;
 }
+// Fonction pour ajouter plusieurs taches
 
 void ajouter_plusieure_taches(tache taches[], int *size)
 {
@@ -177,6 +182,7 @@ void ajouter_plusieure_taches(tache taches[], int *size)
         ajouter_tache(taches, size);
     }
 }
+// Fonction pour afficher les taches
 
 void affichage(tache taches[], int size)
 {
@@ -193,9 +199,11 @@ void affichage(tache taches[], int size)
     }
 }
 
+// Fonction pour Trier les tâches par ordre alphabétique.
+
 void trie_alphabitique(tache taches[], int size)
 {
-    int i, j;
+        int i, j;
         tache tmp;
          for (i = 0; i < size - 1; i++) {
          for (j = i + 1; j < size; j++) {
@@ -209,6 +217,8 @@ void trie_alphabitique(tache taches[], int size)
           system("cls");
         affichage(taches,size);
 }
+
+// Fonction  pour Trier les tâches par deadline.
 
 void trie_deadline(tache taches[], int size)
 {
@@ -238,10 +248,10 @@ void trie_deadline(tache taches[], int size)
            affichage(taches,size);
 
 }
-
+// Fonction pour Trier les tâches par deadline
 void delai_trois_jours(tache taches[], int size)
 {
-    printf("Taches avec un delai de 3 jours ou moins :\n");
+    printf("\n Taches avec un delai de 3 jours ou moins :\n");
     time_t seconds = time(NULL);
     struct tm *current_time = localtime(&seconds);
     int currentYear = (current_time->tm_year + 1900);
@@ -253,7 +263,7 @@ void delai_trois_jours(tache taches[], int size)
         int jours = taches[i].deadline.annee * 365 + taches[i].deadline.mois * 30 + taches[i].deadline.jour;
         int delai_jour = jours - (currentYear * 365 + currentMonth * 30 + currentDay);
 
-        system("cls");
+
         if (delai_jour <= 3 && delai_jour >= 0) {
             printf("Identifiant : %d\nTitre : %s\nDescription : %s\nDeadline : %d/%d/%d\nStatut : %s\n\n",
                    taches[i].identifiant, taches[i].titre, taches[i].description,
@@ -262,6 +272,8 @@ void delai_trois_jours(tache taches[], int size)
         }
     }
 }
+
+// Fonction pour Modifier une tâche
 
 void modification(tache taches[], int size) {
     int id, found = 0;
@@ -272,11 +284,12 @@ void modification(tache taches[], int size) {
         if (taches[i].identifiant == id) {
             found = 1;
             int choix;
-            printf("\n");
-            printf("\t\t >>>> Que voulez-vous modifier ?\n");
+            printf("\n \t\t ----------------------------------\n");
+            printf("\t\t >>>> Que voulez vous modifier ?\n");
             printf("\t\t 1--> Description\n");
-            printf("\t\t 2-->  Statut\n");
-            printf("\t\t 3-->  Deadline\n");
+            printf("\t\t 2--> Statut\n");
+            printf("\t\t 3--> Deadline\n");
+             printf("\t\t -------------------------------------\n");
             printf("Veuillez saisie votre choix :");
             scanf("%d", &choix);
 
@@ -306,12 +319,13 @@ void modification(tache taches[], int size) {
         printf("Tache non trouvee.\n");
     }
 }
+// Fonction pour Supprimer une tâche par identifiant
 
 void supprimer(tache taches[], int *size)
 {
     int id;
     int tr = 0;
-    printf("Entrer l'identifiant de la tache que vous voulez supprimer : ");
+    printf("\nEntrer l'identifiant de la tache que vous voulez supprimer : ");
     scanf("%d", &id);
 
     for (int i = 0; i < *size; i++) {
@@ -333,19 +347,21 @@ void supprimer(tache taches[], int *size)
         printf("Tache introuvable.\n");
     }
 }
-
+// Fonction pour Rechercher les Tâches
 void recherche(tache taches[], int size) {
     int choix;
+    printf("\n\t\t---------------------------\n");
     printf("\t\t >>>>MENU DE RECHERCHE :\n");
     printf("\t\t 1-->Recherche par ID\n");
     printf("\t\t 2-->Recherche par titre\n");
+    printf("\t\t -----------------------------\n");
     printf("Taper votre choix : ");
     scanf("%d", &choix);
 
     switch (choix) {
         case 1: {
             int id;
-            printf("Entrez l'ID de la tâche que vous recherchez : ");
+            printf("\nEntrez l'ID de la tâche que vous recherchez : ");
             scanf("%d", &id);
             int found = 0;
 
@@ -399,9 +415,10 @@ void recherche(tache taches[], int size) {
     }
 }
 
+// Fonction pour Statistiques
 void statistique(tache taches[], int size){
     printf("\n");
- 
+
             int complet = 0;
             int incomplet = 0;
 
@@ -436,5 +453,5 @@ void statistique(tache taches[], int size){
                     taches[i].deadline.jour, taches[i].deadline.mois, taches[i].deadline.annee,
                     taches[i].statut, delai_jour);
             }
-    
+
 }
